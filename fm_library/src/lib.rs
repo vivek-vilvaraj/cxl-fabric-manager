@@ -19,12 +19,15 @@
  * limitations under the License.
  */
 
+ mod mailbox;
+ use crate::mailbox::mailbox::get_pci_mm_config;
 pub mod cxl_fm_lib {
 	use std::net::{TcpStream};
 	use std::io::Write;
 	use std::io::BufReader;
 	use std::io::BufRead;
-
+	use crate::get_pci_mm_config;
+	//pub use cxl_fm_lib_mailbox::get_pci_mm_config;
 	/*
 	 * Available commands
 	 */
@@ -111,6 +114,8 @@ pub mod cxl_fm_lib {
 		stream.write_all(full_command.as_bytes()).unwrap();
 
 		let buf_reader = BufReader::new(&mut stream);
+		let pcie_bdf = "35:00.0";
+    	get_pci_mm_config(pcie_bdf);
 		let mut response_line = buf_reader.lines();
 
 		if env.is_debug {

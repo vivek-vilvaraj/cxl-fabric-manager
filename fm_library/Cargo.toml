@@ -7,6 +7,6 @@ edition = "2021"
 
 [lib]
 name = "fm_communication"
-path = "src/lib.rs"
+path = "src/lib.rs src/mailbox.rs "
 
 [dependencies]
